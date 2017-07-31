@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addOne, minusOne } from '../actions/actions';
 
+require('./news.css');
+
 class News extends Component {
     constructor(props) {
         super(props);
@@ -10,14 +12,24 @@ class News extends Component {
             count: 0
         }
     }
+    componentDidMount() {
+        this.props.dispatch(addOne());
+    }
     render() {
         const { count } = this.state;
-        const { dispatch, data, number } = this.props;
+        const { newsLatest } = this.props.data;
         return (
             <div>
-                <button className="btn full" onClick={() => dispatch(addOne())}>ADD 1</button>
-                <button className="btn full" onClick={() => dispatch(minusOne())}>MINUS 1</button>
-                <p>{data.number}</p>
+                {
+                    newsLatest.stories.map(item => (
+                        <div className="row">
+                            <div className="feed-card" key={item.id}>
+                                <img src={'http://lovestreet.leanapp.cn/zhihu/resource?url=' + item.images[0]} />
+                                <p>{item.title}</p>
+                            </div>
+                        </div>
+                    ))
+                }
             </div>
         )
     }
