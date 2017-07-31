@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { addOne, minusOne } from '../actions/actions';
 
 class News extends Component {
     constructor(props) {
@@ -9,20 +10,23 @@ class News extends Component {
             count: 0
         }
     }
-    add() {
-        this.setState({
-            count: this.state.count + 1
-        })
-    }
     render() {
         const { count } = this.state;
+        const { dispatch, data, number } = this.props;
         return (
             <div>
-                <button className="btn" onClick={this.add.bind(this)}>CLICK</button>
-                <p>{count}</p>
+                <button className="btn full" onClick={() => dispatch(addOne())}>ADD 1</button>
+                <button className="btn full" onClick={() => dispatch(minusOne())}>MINUS 1</button>
+                <p>{data.number}</p>
             </div>
         )
     }
 }
 
-export default connect()(News);
+function Lists(state) {
+    return {
+        data: state.lists
+    }
+}
+
+export default connect(Lists)(News);

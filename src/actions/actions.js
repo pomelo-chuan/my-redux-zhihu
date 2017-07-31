@@ -1,8 +1,14 @@
-export const GET_LISTS = 'GET_LISTS';
+export const ADD_ONE = 'ADD_ONE';
+export const MINUS_ONE = 'MINUS_ONE';
 
-export function getLists(text) {
+export function addOne() {
     return {
-        type: GET_LISTS,
-        text
+        type: ADD_ONE
+    }
+}
+
+export function minusOne() {
+    return {
+        type: MINUS_ONE
     }
 }

@@ -1,16 +1,20 @@
 import { combineReducers } from 'redux';
-import { GET_LISTS } from '../actions/actions';
+import { ADD_ONE, MINUS_ONE } from '../actions/actions';
 
+const initState = {
+    number: 0
+};
 
-function lists(state = [], action) {
+function lists(state = initState, action) {
     switch (action.type) {
-        case GET_LISTS:
-            return [
-                ...state,
-                {
-                    text: action.text
-                }
-            ]
+        case ADD_ONE:
+            return {
+                number: state.number + 1
+            }
+        case MINUS_ONE:
+            return {
+                number: state.number - 1
+            }
         default:
             return state
     }
